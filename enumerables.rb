@@ -21,11 +21,13 @@ module Enumerable
         return self
     end
     def my_select
-        return_arr = []
+        return self.my_each unless block_given?
+
+        arr = []
         self.my_each do |item|
-            return_arr.push(item) if yield(item)
+            arr.push(item) if yield(item)
         end
-        return_arr
+        return arr
     end
     def my_all?
         self.my_each do |item|
