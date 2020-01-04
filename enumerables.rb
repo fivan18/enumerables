@@ -100,4 +100,30 @@ module Enumerable
         end
         return false
     end    
+=begin
+        my_none?
+
+        %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
+        %w{ant bear cat}.my_none? { |word| word.length >= 4 } #=> false
+        %w{ant bear cat}.my_none?(/d/)                        #=> true
+        [1, 3.14, 42].my_none?(Float)                         #=> false
+        [].my_none?                                           #=> true
+        [nil].my_none?                                        #=> true
+        [nil, false].my_none?                                 #=> true
+        [nil, false, true].my_none?                           #=> false
+=end
+    def my_none?(pattern = nil)
+        if block_given?
+            condition = Proc.new { |item,pattern| yield(item) }
+        elsif !pattern.nil?
+            condition = Proc.new { |item,pattern| pattern === item }
+        else
+            condition = Proc.new { |item,pattern| item }
+        end
+
+        self.my_each do |item|
+            return false if condition.call(item,pattern)
+        end
+        return true
+    end        
 end
