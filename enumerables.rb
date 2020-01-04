@@ -76,4 +76,28 @@ module Enumerable
         end
         return true
     end
+=begin
+        my_any?
+
+        %w[ant bear cat].my_any? { |word| word.length >= 3 } #=> true
+        %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
+        %w[ant bear cat].my_any?(/d/)                        #=> false
+        [nil, true, 99].my_any?(Integer)                     #=> true
+        [nil, true, 99].my_any?                              #=> true
+        [].my_any?                                           #=> false
+=end
+    def my_any?(pattern = nil)
+        if block_given?
+            condition = Proc.new { |item,pattern| yield(item) }
+        elsif !pattern.nil?
+            condition = Proc.new { |item,pattern| pattern === item }
+        else
+            condition = Proc.new { |item,pattern| item }
+        end
+
+        self.my_each do |item|
+            return true if condition.call(item,pattern)
+        end
+        return false
+    end    
 end
