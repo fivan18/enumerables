@@ -20,4 +20,10 @@ module Enumerable
         end
         return_arr
     end
+    def my_all?
+        self.my_each do |item|
+            return false unless yield(item)
+        end
+        true
+    end
 end
