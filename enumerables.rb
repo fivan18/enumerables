@@ -29,10 +29,18 @@ module Enumerable
         end
         return arr
     end
-    def my_all?
-        self.my_each do |item|
-            return false unless yield(item)
+    def my_all?(pattern = nil)
+        if block_given?
+            condition = Proc.new { |item,pattern| yield(item) }
+        elsif !pattern.nil?
+            condition = Proc.new { |item,pattern| pattern === item }
+        else
+            condition = Proc.new { |item,pattern| item }
         end
-        true
+
+        self.my_each do |item|
+            return false unless condition.call(item,pattern)
+        end
+        return true
     end
 end
