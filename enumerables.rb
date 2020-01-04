@@ -125,5 +125,24 @@ module Enumerable
             return false if condition.call(item,pattern)
         end
         return true
-    end        
+    end  
+=begin
+        my_count
+
+        ary = [1, 2, 4, 2]
+        ary.my_count               #=> 4
+        ary.my_count(2)            #=> 2
+        ary.my_count{ |x| x%2==0 } #=> 3
+=end
+    def my_count(item = nil)
+        count = 0;
+        if block_given?
+            self.my_each { |i| count += 1 if yield(i) }
+        elsif !item.nil?
+            self.my_each { |i| count += 1 if i == item }
+        else
+            return self.size
+        end
+        return count
+    end                  
 end
