@@ -145,4 +145,19 @@ module Enumerable
         end
         return count
     end                  
+=begin
+        my_map
+
+        (1..4).to_a.my_map { |i| i*i }      #=> [1, 4, 9, 16]
+        (1..4).to_a.my_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
+=end
+    def my_map
+        arr = []
+        if block_given?
+            self.my_each { |i| arr.push(yield(i)) }
+            return  arr
+        else
+            return self.my_each
+        end
+    end                  
 end
