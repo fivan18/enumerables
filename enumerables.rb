@@ -11,11 +11,14 @@ module Enumerable
         return self
     end            
     def my_each_with_index
+        return self.my_each unless block_given?
+
         i = 0
         while i < self.size
             yield(self[i], i)
             i = i + 1
         end
+        return self
     end
     def my_select
         return_arr = []
