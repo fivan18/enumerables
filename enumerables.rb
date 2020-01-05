@@ -159,5 +159,51 @@ module Enumerable
         else
             return self.my_each
         end
+    end     
+=begin
+        my_inject
+
+        # Sum some numbers
+        (5..10).to_a.my_inject(:+)                             #=> 45
+        # Same using a block and inject
+        (5..10).to_a.my_inject { |sum, n| sum + n }            #=> 45
+        # Multiply some numbers
+        (5..10).to_a.my_inject(1, :*)                          #=> 151200
+        # Same using a block
+        (5..10).to_a.my_inject(1) { |product, n| product * n } #=> 151200
+        # find the longest word
+        longest = %w{ cat sheep bear }.my_inject do |memo, word|
+            memo.length > word.length ? memo : word
+        end
+        longest                                        #=> "sheep"
+=end
+    def my_inject(*args)
+        set_initial = nil
+        initial = nil
+        sym = nil
+        if args.size == 0
+            set_initial = self.size > 0 ? self[0] : 0 
+        elsif (args.size == 1) && (args[0].is_a? Symbol)
+            set_initial = self.size > 0 ? self[0] : 0
+            sym = args[0]
+        elsif args.size == 1
+            initial = args[0]
+        else
+            initial = args[0]
+            sym = args[1]
+        end
+
+        if (initial && block_given?)
+            self.my_each { |item| initial = yield(initial, item) }
+        elsif block_given?
+            self.my_each_with_index { |item,index| set_initial = yield(set_initial, item) if index > 0 }
+            return set_initial
+        elsif (initial && sym)
+            self.my_each { |item| initial = initial.send sym,item }
+        elsif sym
+            self.my_each_with_index { |item, index| set_initial = set_initial.send sym,item if index > 0 }
+            return set_initial
+        end
+        return initial
     end                  
 end
