@@ -38,12 +38,19 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc do |item, patt|
+                    if patt.is_a? Regexp
+                      patt.match?(item)
+                    else
+                      item.is_a? patt
+                    end
+                  end
                 else
                   proc { |item, _patt| item }
                 end
 
     my_each do |item|
+      puts condition.call(item, pattern)
       return false unless condition.call(item, pattern)
     end
     true
@@ -53,11 +60,16 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc do |item, patt|
+                    if patt.is_a? Regexp
+                      patt.match?(item)
+                    else
+                      item.is_a? patt
+                    end
+                  end
                 else
                   proc { |item, _patt| item }
                 end
-
     my_each do |item|
       return true if condition.call(item, pattern)
     end
@@ -68,7 +80,13 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc do |item, patt|
+                    if patt.is_a? Regexp
+                      patt.match?(item)
+                    else
+                      item.is_a? patt
+                    end
+                  end
                 else
                   proc { |item, _patt| item }
                 end
