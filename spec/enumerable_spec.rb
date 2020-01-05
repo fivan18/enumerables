@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/enumerable.rb'
+require './lib/enumerable_1.rb'
+require './lib/enumerable_2.rb'
+require './lib/multiply_els.rb'
 
 describe '#my_each' do
   before(:each) do
