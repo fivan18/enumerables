@@ -205,5 +205,13 @@ module Enumerable
             return set_initial
         end
         return initial
-    end                  
+    end  
+end
+=begin
+        multiply_els
+
+        multiply_els([2,4,5]) #=> 40
+=end  
+def multiply_els(arr)
+    arr.my_inject(1, :*)
 end
