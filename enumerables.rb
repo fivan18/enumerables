@@ -148,17 +148,21 @@ module Enumerable
 =begin
         my_map
 
-        (1..4).to_a.my_map { |i| i*i }      #=> [1, 4, 9, 16]
-        (1..4).to_a.my_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
+        (1..4).to_a.my_map(Proc.new { |i| i*i })        #=> [1, 4, 9, 16]
+        (1..4).to_a.my_map(Proc.new { "cat"  })         #=> ["cat", "cat", "cat", "cat"]
+        (1..4).to_a.my_map { |i| i*i }                  #=> [1, 4, 9, 16]
+        (1..4).to_a.my_map { "cat"  }                   #=> ["cat", "cat", "cat", "cat"]
 =end
-    def my_map
+    def my_map(proc = nil)
         arr = []
-        if block_given?
+        if proc
+            self.my_each { |i| arr.push(proc.call(i)) }
+        elsif block_given?
             self.my_each { |i| arr.push(yield(i)) }
-            return  arr
         else
             return self.my_each
         end
+        return  arr
     end     
 =begin
         my_inject
