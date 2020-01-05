@@ -104,31 +104,24 @@ module Enumerable
   end
 
   def my_inject(*args)
-    set_initial = nil
     initial = nil
-    sym = nil
-    if args.empty?
-      set_initial = !empty? ? self[0] : 0
-    elsif (args.size == 1) && (args[0].is_a? Symbol)
-      set_initial = !empty? ? self[0] : 0
-      sym = args[0]
-    elsif args.size == 1
-      initial = args[0]
+    if block_given?
+      initial = args.empty? ? self[0] : args[0]
+      my_each_with_index do |item, index|
+        initial = args.empty? && index.zero? ? initial : yield(initial, item)
+      end
     else
-      initial = args[0]
-      sym = args[1]
-    end
-
-    if initial && block_given?
-      my_each { |item| initial = yield(initial, item) }
-    elsif block_given?
-      my_each_with_index { |item, index| set_initial = yield(set_initial, item) if index.positive? }
-      return set_initial
-    elsif initial && sym
-      my_each { |item| initial = initial.send sym, item }
-    elsif sym
-      my_each_with_index { |item, index| set_initial = set_initial.send sym, item if index.positive? }
-      return set_initial
+      sym = nil
+      if args.size == 1
+        initial = self[0]
+        sym = args[0]
+      else
+        initial = args[0]
+        sym = args[1]
+      end
+      my_each_with_index do |item, index|
+        initial = args.size == 1 && index.zero? ? initial : initial.send(sym, item)
+      end
     end
     initial
   end
