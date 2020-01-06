@@ -4,23 +4,29 @@ module Enumerable
   def my_each
     return each unless block_given?
 
+    arr = self
+    arr = arr.to_a unless arr.is_a? Array
+
     i = 0
-    while i < size
-      yield(self[i])
+    while i < arr.size
+      yield(arr[i])
       i += 1
     end
-    self
+    arr
   end
 
   def my_each_with_index
     return my_each unless block_given?
 
+    arr = self
+    arr = arr.to_a unless arr.is_a? Array
+
     i = 0
-    while i < size
+    while i < arr.size
       yield(self[i], i)
       i += 1
     end
-    self
+    arr
   end
 
   def my_select

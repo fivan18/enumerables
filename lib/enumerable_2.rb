@@ -26,32 +26,36 @@ module Enumerable
   end
 
   def my_inject(*args)
-    values = get_initial_symbol(args)
+    values = get_initial_symbol_arr(args)
     initial = values[0]
     sym = values[1]
+    arr = values[2]
 
     if block_given?
-      my_each_with_index do |item, index|
+      arr.my_each_with_index do |item, index|
         initial = args.empty? && index.zero? ? initial : yield(initial, item)
       end
     else
-      my_each_with_index do |item, index|
+      arr.my_each_with_index do |item, index|
         initial = args.size == 1 && index.zero? ? initial : initial.send(sym, item)
       end
     end
     initial
   end
 
-  def get_initial_symbol(args)
+  def get_initial_symbol_arr(args)
+    arr = self
+    arr = arr.to_a unless arr.is_a? Array
+
     initial = nil
     symbol = nil
     case args.size
     when 0
-      initial = self[0]
+      initial = arr[0]
       symbol = nil
     when 1
       if args[0].is_a? Symbol
-        initial = self[0]
+        initial = arr[0]
         symbol = args[0]
       else
         initial = args[0]
@@ -61,6 +65,6 @@ module Enumerable
       initial = args[0]
       symbol = args[1]
     end
-    [initial, symbol]
+    [initial, symbol, arr]
   end
 end

@@ -140,16 +140,16 @@ describe '#my_all?' do
       end
     end
     it 'sum some numbers using only a symbol' do
-      expect((5..10).to_a.my_inject(:+)).to eql(45)
+      expect((5..10).my_inject(:+)).to eql(45)
     end
     it 'same using only a block' do
-      expect((5..10).to_a.my_inject { |sum, n| sum + n }).to eql(45)
+      expect((5..10).my_inject { |sum, n| sum + n }).to eql(45)
     end
     it 'multiply some numbers using initial and symbol' do
-      expect((5..10).to_a.my_inject(1, :*)).to eql(151_200)
+      expect((5..10).my_inject(1, :*)).to eql(151_200)
     end
     it 'same using initial and block' do
-      expect((5..10).to_a.my_inject(1) { |product, n| product * n }).to eql(151_200)
+      expect((5..10).my_inject(1) { |product, n| product * n }).to eql(151_200)
     end
     it 'find the longest word' do
       expect(@longest).to eql('sheep')
