@@ -10,6 +10,13 @@
 /test/version_tmp/
 /tmp/
 
+test-cases.txt
+Gemfile
+Gemfile.lock
+/bin
+.rspec
+spec/spec_helper.rb
+
 # Used by dotenv library to load environment variables.
 # .env
 
