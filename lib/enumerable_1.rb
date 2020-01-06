@@ -2,7 +2,6 @@
 
 module Enumerable
   def my_each
-    # return an enumerator
     return each unless block_given?
 
     i = 0
