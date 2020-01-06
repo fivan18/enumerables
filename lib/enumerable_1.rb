@@ -50,7 +50,6 @@ module Enumerable
                 end
 
     my_each do |item|
-      puts condition.call(item, pattern)
       return false unless condition.call(item, pattern)
     end
     true
