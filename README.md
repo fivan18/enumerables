@@ -2,6 +2,11 @@
 
 > Rebuild some [enumerable](https://ruby-doc.org/core-2.7.0/Enumerable.html) methods.
 
+<p align="center">
+    <img src="screenshots/iterate-meme.png">
+</p>
+
+Enumerable module gets mixed into the Array and Hash classes (among others) and provides you with lots of handy iterator methods.
 As part of the [PROJECT: ADVANCED BUILDING BLOCKS](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks), in this project I implement my own version of the next Ruby’s enumerable methods. 
 
 - each
@@ -13,6 +18,11 @@ As part of the [PROJECT: ADVANCED BUILDING BLOCKS](https://www.theodinproject.co
 - count
 - map
 - inject
+
+## Microverse Project specific requirements
+- Use the Git Flow for the first time
+- Take a look at Ruby docs about Enumerable class [https://ruby-doc.org/core-2.6.5/Enumerable.html](https://ruby-doc.org/core-2.6.5/Enumerable.html)
+- As your code will be a bit more complex disable Style/CaseEquality cop
 
 ## Built With
 
