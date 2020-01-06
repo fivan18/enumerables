@@ -38,7 +38,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc { |item, patt| patt === item } # rubocop:disable Style/CaseEquality
                 else
                   proc { |item, _patt| item }
                 end
@@ -53,7 +53,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc { |item, patt| patt === item } # rubocop:disable Style/CaseEquality
                 else
                   proc { |item, _patt| item }
                 end
@@ -67,7 +67,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc { |item, patt| patt === item }
+                  proc { |item, patt| patt === item } # rubocop:disable Style/CaseEquality
                 else
                   proc { |item, _patt| item }
                 end
