@@ -29,5 +29,3 @@ As part of the [PROJECT: ADVANCED BUILDING BLOCKS](https://www.theodinproject.co
 - Github: [@fivan18](https://github.com/fivan18)
 - Twitter: [@fivanunam](https://twitter.com/fivanunam)
 - Linkedin: [fivan](https://www.linkedin.com/in/fivan)
-
-
