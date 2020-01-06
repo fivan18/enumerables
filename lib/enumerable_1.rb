@@ -38,13 +38,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc do |item, patt|
-                    if patt.is_a? Regexp
-                      patt.match?(item)
-                    else
-                      item.is_a? patt
-                    end
-                  end
+                  proc { |item, patt| patt === item }
                 else
                   proc { |item, _patt| item }
                 end
@@ -59,13 +53,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc do |item, patt|
-                    if patt.is_a? Regexp
-                      patt.match?(item)
-                    else
-                      item.is_a? patt
-                    end
-                  end
+                  proc { |item, patt| patt === item }
                 else
                   proc { |item, _patt| item }
                 end
@@ -79,13 +67,7 @@ module Enumerable
     condition = if block_given?
                   proc { |item, _patt| yield(item) }
                 elsif !pattern.nil?
-                  proc do |item, patt|
-                    if patt.is_a? Regexp
-                      patt.match?(item)
-                    else
-                      item.is_a? patt
-                    end
-                  end
+                  proc { |item, patt| patt === item }
                 else
                   proc { |item, _patt| item }
                 end
