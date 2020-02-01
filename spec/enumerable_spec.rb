@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
 describe '#my_each' do
+  let(:arr){ [] }
   it 'fill an array with another array values' do
-    arr = []
     %w[a b c].my_each { |x| arr.push(x) }
-
     expect(arr).to eql(%w[a b c])
   end
 end
 
 describe '#my_each_with_index' do
+  let(:hash){ {} }
   it 'fill a hash with array values' do
-    hash = {}
     %w[cat dog wombat].my_each_with_index do |item, index|
       hash[item] = index
     end
-
     expect(hash).to eql('cat' => 0, 'dog' => 1, 'wombat' => 2)
   end
 end
@@ -128,6 +126,11 @@ describe '#my_all?' do
   end
 
   describe '#my_inject' do
+    let(:longest) do 
+      %w[cat sheep bear].my_inject do |memo, word| 
+        memo.length > word.length ? memo : word 
+      end 
+    end
     it 'sum some numbers using only a symbol' do
       expect((5..10).my_inject(:+)).to eql(45)
     end
@@ -141,9 +144,6 @@ describe '#my_all?' do
       expect((5..10).my_inject(1) { |product, n| product * n }).to eql(151_200)
     end
     it 'find the longest word' do
-      longest = %w[cat sheep bear].my_inject do |memo, word|
-        memo.length > word.length ? memo : word
-      end
       expect(longest).to eql('sheep')
     end
   end
