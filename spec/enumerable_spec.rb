@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe '#my_each' do
-  let(:arr){ [] }
+  let(:arr) { [] }
   it 'fill an array with another array values' do
     %w[a b c].my_each { |x| arr.push(x) }
     expect(arr).to eql(%w[a b c])
@@ -9,7 +9,7 @@ describe '#my_each' do
 end
 
 describe '#my_each_with_index' do
-  let(:hash){ {} }
+  let(:hash) { {} }
   it 'fill a hash with array values' do
     %w[cat dog wombat].my_each_with_index do |item, index|
       hash[item] = index
@@ -126,10 +126,10 @@ describe '#my_all?' do
   end
 
   describe '#my_inject' do
-    let(:longest) do 
-      %w[cat sheep bear].my_inject do |memo, word| 
-        memo.length > word.length ? memo : word 
-      end 
+    let(:longest) do
+      %w[cat sheep bear].my_inject do |memo, word|
+        memo.length > word.length ? memo : word
+      end
     end
     it 'sum some numbers using only a symbol' do
       expect((5..10).my_inject(:+)).to eql(45)
